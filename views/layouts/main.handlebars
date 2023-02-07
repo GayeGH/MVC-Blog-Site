@@ -1,42 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  type="text/css" href="/style.css">
-    <title>MVC BLOG</title>
-</head>
-<body>
-    
-    <header>
-        <h1>Let's Blog About MVC!</h1>
-   
-<div>
-<ul>
-  <li><a href="#home">Home</a></li>
-  <li><a href="#dashboard">Dashboard</a></li>
-  <li><a href="#login">Login</a></li>
-  <li><a href="#logout">Logout</a></li>
-</ul>
-</div>
-</header>
-
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Let's Blog About MVC</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
-{{!-- <form action="/action_page.php">
-  <p><label for="mvcblog">Comments</label></p>
-  <textarea id="mvcblog" name="mvcblog" rows="4" cols="100">We are learning about MVC in Module 14.</textarea>
-  <br>
-  <input type="submit" value="Submit">
-</form>
-<br> --}}
-
 <body>
+  <div class="flex-column justify-space-around">
+    <header class="display-flex justify-space-between align-center p-2">
+      <h1>
+        <a href="/">Let's Blog</a>
+      </h1>
+      <nav>
+        <!-- Conditionally render login or logout links -->
+        {{#if logged_in}}
+        <a href="/profile">profile</a> |
+        <button class="no-button" id="logout">logout</button>
+        {{else}}
+        <a href="/login">login</a>
+        {{/if}}
+      </nav>
+    </header>
+    <main class="container container-fluid mt-5">
+      <!-- Render the sub layout -->
+      {{{ body }}}
+    </main>
+    <footer>
+      
+    </footer>
+  </div>
 
-
-   
-   <div style="border: 1px solid black">First Post</div>
+  <!-- Render script for logged in users only -->
+  {{#if logged_in}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
 </body>
+
 </html>
