@@ -1,9 +1,9 @@
 # Title
-MCC BLOG SITE
+MVC BLOG SITE
 
 ## Description
 
-MvC Blog Site is a blog website where users can post their thoughts about different tech articles.
+MVC Blog Site is a blog website where users can post their thoughts about different tech articles.
 
 ## Installation
 
