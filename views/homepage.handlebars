@@ -1,14 +1,40 @@
-{{#each blogpost as |blogpost| }}
-<div class="row mb-4 post">
-  <div class="col-md-5">
-    
-      <p>Created by {{blogpost.user.name}} on {{format_date blogpost.date_created}}</p>
-  </div>
-  <div class="col-md-7">
-    <p>
-      {{blogpost.description}}
-    </p>
-  </div>
-</div>
-{{/each}}
+ <content>
+   <div id="post1" class="card">
+    <h2>Blogpost 1</h2>
+      
+      <p>
+        "Why MVC Is So Important",<br>
+         by: Bob Green<br>
+         June 6,2021<br>
+        MVC allows developers to maintain a true seperation of concerns, devising their code between the Model layer for data,<br> 
+        the View layer for design and the Controller layer for application logic.
+      </p>
+    </div>
 
+    <div id="post2" class="card">
+      <h2>Blogpost 2</h2>
+     <p>
+      "Authentication vs. Authorization"<br>
+       by: Kerry Talbot<br>
+       December 3,2019<br>
+     There is a difference between authentication and authorization. Authentication means confirming your own identity,<br>
+     whereas authorization means being allowed access to the system.
+     </p>
+    </div>
+
+    <div id="post3" class="card">
+      <h2>Blogpost 3</h2>
+      <p>
+        "Object Relational Mapping"<br>
+        by: Reid Smith<br>
+        April 9, 2020<br>
+    I have really loved learning about ORMs. It has simplified the way I create queries in SQL!
+        
+      </p>
+    </div>
+
+   
+
+    
+   
+  </content>
