@@ -11,12 +11,14 @@ const loginFormHandler = async (event) => {
         body: JSON.stringify({ email, password }),
         headers: { 'Content-Type': 'application/json' },
       });
+
        if (response.ok) {
-        document.location.replace('/');
+        document.location.replace('/profile');
       } else {
-        alert('Failed to log in.');
+        alert(response.statusText);
       }
-    };
+    }
+  };
   
   
   const signupFormHandler = async (event) => {
@@ -25,6 +27,7 @@ const loginFormHandler = async (event) => {
     const name = document.querySelector('#name-signup').value.trim();
     const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
+
     console.log('name', name)
     console.log("email", email)
     console.log('password', password)
@@ -37,9 +40,9 @@ const loginFormHandler = async (event) => {
       });
   
       if (response.ok) {
-        document.location.replace('/');
+        document.location.replace('/profile');
       } else {
-        alert('Failed to sign up.');
+        alert(response.statusText);
       }
     }
   };
@@ -51,4 +54,3 @@ const loginFormHandler = async (event) => {
   document
     .querySelector('.signup-form')
     .addEventListener('submit', signupFormHandler);
-}
