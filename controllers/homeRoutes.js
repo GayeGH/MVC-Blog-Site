@@ -5,30 +5,32 @@ const withAuth = require('../utils/auth');
 // GET all 
 router.get('/', async (req, res) => {
   try {
-    const dbBlogpostsData = await Blogposts.findAll({
+    const blogpostsData = await Blogposts.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+      ],
       
     });
 
-    const posts = dbBlogpostsData.map((post) =>
-      post.get({ plain: true })
+    const blogposts = blogpostsData.map((post) => blogposts.get({ plain: true })
     );
 
-    res.render('homepage' );
+    res.render('homepage',{
+      blogposts,
+      logged_in: req.session.logged_in
+    });
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
 
 // GET one blogpost
-router.get('/blogpost/:id', async (req, res) => {
-  // If the user is not logged in, redirect the user to the login page
-  if (!req.session.loggedIn) {
-    res.redirect('/login');
-  } else {
-    // If the user is logged in, allow them to view the posts
-    try {
-      const dbBlogpostsData = await Blogposts.findByPk(req.params.id, {
+router.get('/blogposts/:id', async (req, res) => {
+   try {
+      const blogpostsData = await Blogposts.findByPk(req.params.id, {
         include: [
           {
             model: Blogposts,
@@ -43,16 +45,27 @@ router.get('/blogpost/:id', async (req, res) => {
           },
         ],
       });
-      const blogposts = dbBlogpostsData.get({ plain: true });
-      res.render('blogposts', { blogposts, loggedIn: req.session.loggedIn });
+      const blogposts = blogpostsData.get({ plain: true });
+
+
+      res.render('blogposts', { 
+        ...blogposts, 
+        loggedIn: req.session.loggedIn });
+
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
     }
-  }
-});
+  });
 
-router.get('/login', (req, res) => {
+router.get('/profile', withAuth, async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: {exclued: ['password']},
+      include: [{model: Blogposts }],
+    });
+    const user =userData.get({plain:true})
+  }
   if (req.session.loggedIn) {
     res.redirect('/');
     return;
