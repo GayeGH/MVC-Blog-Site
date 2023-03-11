@@ -64,10 +64,20 @@ router.get('/profile', withAuth, async (req, res) => {
       attributes: {exclued: ['password']},
       include: [{model: Blogposts }],
     });
-    const user =userData.get({plain:true})
+    const user =userData.get({ plain:true });
+
+    res.render('profile', {
+      ...user,
+      logged_in: true
+    });
+  } catch (err) {
+    res.status(500).json(err);
   }
-  if (req.session.loggedIn) {
-    res.redirect('/');
+});
+router.get('/login', (req, res) => {
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.logged_in) {
+    res.redirect('/profile');
     return;
   }
 
